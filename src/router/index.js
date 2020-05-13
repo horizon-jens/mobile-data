@@ -2,7 +2,6 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Login from '../views/Login.vue'
 import Home from '../views/Home.vue'
-// import patientRoutes from './patient'
 
 Vue.use(Router)
 
@@ -39,8 +38,32 @@ const router = new Router({
       },
       component: () => import( /* webpackChunkName: "diseaseRank" */ '../views/DiseaseRank.vue')
     },
+    {
+      path: '/EHRRate',
+      name: 'EHRRate',
+      meta: {
+        "keepAlive": false
+      },
+      component: () => import( /* webpackChunkName: "EHRRate" */ '../views/EHRRate.vue')
+    },
+    {
+      path: '/incomeAnalyse',
+      name: 'incomeAnalyse',
+      meta: {
+        "keepAlive": false
+      },
+      component: () => import( /* webpackChunkName: "incomeAnalyse" */ '../views/IncomeAnalyse.vue')
+    },
+    {
+      path: '/hospitalizedAnalyse',
+      name: 'hospitalizedAnalyse',
+      meta: {
+        "keepAlive": false
+      },
+      component: () => import( /* webpackChunkName: "hospitalizedAnalyse" */ '../views/HospitalizedAnalyse.vue')
+    },
     // {
-    //   path: '/patient', // 患者详情
+    //   path: '/patient',
     //   meta: {
     //     "keepAlive": false
     //   },

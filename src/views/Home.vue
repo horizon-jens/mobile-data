@@ -27,7 +27,22 @@ export default {
           text: '疾病排行',
           icon: 'photo-o',
           route: 'diseaseRank'
-        }
+        },
+        {
+          text: '建档统计分析',
+          icon: 'photo-o',
+          route: 'EHRRate'
+        },
+        {
+          text: '收入分析',
+          icon: 'photo-o',
+          route: 'incomeAnalyse'
+        },
+        {
+          text: '住院分析',
+          icon: 'photo-o',
+          route: 'hospitalizedAnalyse'
+        },
       ]
     };
   },

@@ -24,7 +24,27 @@ export default {
       default: function() {
         return [];
       }
-    }
+    },
+    hideX: {
+      type: Boolean,
+      default: false
+    },
+    transpose: {
+      type: Boolean,
+      default: true
+    },
+    padding: {
+      type: Array,
+      default: () => [ 0, 'auto', 'auto', 'auto']
+    },
+    color: {
+      type: Array,
+      default: () => ["l(0) 0:#83bff6 0.5:#188df0 1:#188df0"]
+    },
+    showLabel: {
+      type: Boolean,
+      default: true
+    },
   },
   data() {
     return {
@@ -47,20 +67,24 @@ export default {
         width: window.innerWidth,
         height: (3 / 4) * window.innerWidth,
         pixelRatio: window.devicePixelRatio,
-        padding: [ 0, 'auto', 'auto', 'auto']
+        padding: this.padding
       }));
 
       chart.source(this.data, {
         y: {
-          tickCount: 5
+          tickCount: 4,
+          min: 0,
+          alias: "数量"
         }
       });
-
-      chart.coord({
-        transposed: true
-      });
+      if(this.transpose) {
+        chart.coord({
+          transposed: true
+        });
+      }
 
       chart.tooltip(false);
+      chart.legend(false);
 
       chart.axis("x", {
         label: () => {
@@ -77,35 +101,49 @@ export default {
           const cfg = {};
           cfg.fill = "#b1c8fb";
           cfg.fontSize = "12";
-          return cfg;
-        }
+          return this.hideX ? null : cfg;
+        },
+        line: this.hideX ? null : {}
       });
 
       chart
         .interval()
         .position("x*y")
-        .color("#a8d8b9");
+        .color(this.color);
 
       chart.render();
 
-      const canvas = chart.get("canvas");
-      const group = canvas.addGroup();
-      const shapes = {};
-      this.data.forEach(function(obj) {
-        const point = chart.getPosition(obj);
-        const text = group.addShape("text", {
-          attrs: {
-            x: point.x + 15,
-            y: point.y + 6,
-            text: obj.y,
-            textAlign: "center",
-            textBaseline: "bottom",
-            fill: "#b1c8fb"
+      if(this.showLabel) {
+        const canvas = chart.get("canvas");
+        const group = canvas.addGroup();
+        const shapes = {};
+        this.data.forEach(function(obj) {
+          const point = chart.getPosition(obj);
+          const text = group.addShape("text", {
+            attrs: {
+              x: point.x + 15,
+              y: point.y + 6,
+              text: obj.label || obj.y,
+              textAlign: "center",
+              textBaseline: "bottom",
+              fill: "#b1c8fb"
+            }
+          });
+  
+          shapes[obj.y] = text;
+        });
+      }else{
+        chart.tooltip({
+          alwaysShow: false,
+          triggerOn: ["touchstart", "touchmove"],
+          triggerOff: "touchend",
+          showCrosshairs: true,
+          crosshairsStyle: {
+            stroke: "rgba(255,255,255,0.5)",
+            lineWidth: 1
           }
         });
-
-        shapes[obj.y] = text;
-      });
+      }
 
     }
   }
