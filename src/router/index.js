@@ -23,12 +23,12 @@ const router = new Router({
       component: Home
     },
     {
-      path: '/sevenDayVisit',
-      name: 'sevenDayVisit',
+      path: '/symptomAnalyse',
+      name: 'symptomAnalyse',
       meta: {
         "keepAlive": false
       },
-      component: () => import( /* webpackChunkName: "sevenDayVisit" */ '../views/SevenDayVisit.vue')
+      component: () => import( /* webpackChunkName: "symptomAnalyse" */ '../views/SymptomAnalyse.vue')
     },
     {
       path: '/diseaseRank',
@@ -61,6 +61,14 @@ const router = new Router({
         "keepAlive": false
       },
       component: () => import( /* webpackChunkName: "hospitalizedAnalyse" */ '../views/HospitalizedAnalyse.vue')
+    },
+    {
+      path: '/ageDistribute',
+      name: 'ageDistribute',
+      meta: {
+        "keepAlive": false
+      },
+      component: () => import( /* webpackChunkName: "ageDistribute" */ '../views/AgeDistribute.vue')
     },
     // {
     //   path: '/patient',

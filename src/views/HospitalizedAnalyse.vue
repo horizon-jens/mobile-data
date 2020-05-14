@@ -1,7 +1,7 @@
 <template>
   <div class="home">
-    <p class="title">住院管理</p>
-    <BarChart name="病人管理" :data="source" :transpose=false :padding="padding" :color="color" :showLabel=false />
+    <p class="title">住院分析</p>
+    <BarChart name="今日病人" :data="source" :transpose=false :padding="padding" :color="color" :showLabel=false />
     <ChartTtile name="床位使用率"/>
     <div class="rate">
       <van-circle v-model="currentRate" :stroke-width="80" :rate="78.2" :speed="100" :text="text" size="200px" :color="gradientColor"/>
@@ -15,7 +15,7 @@ import ChartTtile from "@/components/ChartTitle";
 import { Circle } from 'vant';
 
 export default {
-  name: "incomeAnalyse",
+  name: "hospitalizedAnalyse",
   components: {
     BarChart,
     ChartTtile,

@@ -9,7 +9,7 @@
 import BarChart from "@/components/BarChart";
 
 export default {
-  name: "diseaseRank",
+  name: "EHRRate",
   components: {
     BarChart
   },

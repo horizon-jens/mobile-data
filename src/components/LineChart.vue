@@ -37,26 +37,28 @@ export default {
         height: (3 / 4) * window.innerWidth,
         pixelRatio: window.devicePixelRatio
       });
+
       chart.source(this.data, {
         y: {
           tickCount: 5,
-          min: 0,
-          alias: "门诊量"
+          min: 0
         },
         x: {
           range: [0, 1]
         }
       });
+
       chart
         .line()
         .position("x*y")
         .shape("smooth")
-        .color("#f75c2f");
+        .color("type")
 
       chart
         .point()
         .position("x*y")
-        .color("#f75c2f")
+        .color("type")
+        // .color("#f75c2f")
         .style({
           stroke: "#fff",
           lineWidth: 1
